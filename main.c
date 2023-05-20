@@ -31,15 +31,10 @@ TILE* tile;				// Pointer for TILE
 SPRT* sprt;				// Pointer for SPRT
 int prac_x, prac_y;		// x and y for the primitive structure
 
-typedef struct
-{
-	int mode, u, v;
-	int x, y, w, h;
-	int r, g, b;
-	RECT prect, crect;
-} TIM;
-
-TIM nakke_tim;
+// TIM image parameters
+int tim_mode;
+RECT tim_prect,tim_crect;
+int tim_uoffs,tim_voffs;
 
 
 // Function declarations
@@ -55,29 +50,26 @@ int main()
 {
 	init();
 
-	int counter = 0;
+	int _counter = 0;
 	prac_x = 64;
 	prac_y = 128;
 
 	TIM_IMAGE _nakke;
 	loadTexture((u_int*)loadFile("\\NAKKE.TIM;1"), &_nakke);
-	nakke_tim.mode = _nakke.mode;
-	nakke_tim.prect = *_nakke.prect;
-	nakke_tim.crect = *_nakke.crect;
-	nakke_tim.w = nakke_tim.h = 64;
-	nakke_tim.x = 192;
-	nakke_tim.y = 64;
-	nakke_tim.r = nakke_tim.g = nakke_tim.b = 128;
-	nakke_tim.u = (nakke_tim.prect.x%64)<<(2-(nakke_tim.mode&0x3));
-	nakke_tim.v = (nakke_tim.prect.y&0xff);
+	tim_prect = *_nakke.prect;
+	tim_crect = *_nakke.crect;
+	tim_mode = _nakke.mode;
+
+	tim_uoffs = (tim_prect.x%64)<<(2-(tim_mode&0x3));
+	tim_voffs = (tim_prect.y&0xff);
 
 	// Main loop
-	for(;;)
+	while(1)
 	{
-		FntPrint(-1, "SKAL DU SPILLE SMART?");
-		FntPrint(-1, "\nCOUNTER: %d", counter);
+		FntPrint(-1, "HE HE HE, YUP");
+		FntPrint(-1, "\nCOUNTER: %d", _counter);
 		FntFlush(-1);
-		counter++;
+		_counter++;
 
 		draw();
 		display();
@@ -179,9 +171,9 @@ void draw()
 	setSprt(sprt);
 	setXY0(sprt, 192, 64);
 	setWH(sprt, 64, 64);
-	setUV0(sprt, nakke_tim.u, nakke_tim.v);
-	setClut(sprt, nakke_tim.crect.x, nakke_tim.crect.y);
-	setRGB0(sprt, nakke_tim.r, nakke_tim.g, nakke_tim.b);
+	setUV0(sprt, tim_uoffs, tim_voffs);
+	setClut(sprt, tim_crect.x, tim_crect.y);
+	setRGB0(sprt, 128, 128, 128);
 	addPrim(ot[db], sprt);
 
 	nextpri += sizeof(SPRT);
