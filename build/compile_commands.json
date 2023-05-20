@@ -1,0 +1,8 @@
+[
+{
+  "directory": "E:/Programming/PS1/Projects/Practice/build",
+  "command": "C:\\PSn00bSDK\\bin\\mipsel-none-elf-gcc.exe -DPSN00BSDK=1 -IC:/PSn00bSDK/lib/libpsn00b/cmake/../../../include/libpsn00b -g -g -Wa,--strip-local-absolute -ffreestanding -fno-builtin -nostdlib -fdata-sections -ffunction-sections -fsigned-char -fno-strict-overflow -fdiagnostics-color=always -msoft-float -march=r3000 -mtune=r3000 -mabi=32 -mno-mt -mno-llsc -Og -mdivide-breaks -G8 -fno-pic -mno-abicalls -mgpopt -mno-extern-sdata -o CMakeFiles\\practice.dir\\main.c.obj -c E:\\Programming\\PS1\\Projects\\Practice\\main.c",
+  "file": "E:\\Programming\\PS1\\Projects\\Practice\\main.c",
+  "output": "CMakeFiles\\practice.dir\\main.c.obj"
+}
+]
